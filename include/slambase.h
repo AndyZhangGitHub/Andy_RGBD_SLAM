@@ -44,6 +44,8 @@ struct RESULT_OF_PNP
 };
 
 FRAME LoadImages(int index);
+double normofTransform( cv::Mat rvec, 
+                        cv::Mat tvec );
 
 // computeKeyPointsAndDesp 同时提取关键点与特征描述子
 void computeKeyPointsAndDesp( FRAME& frame);

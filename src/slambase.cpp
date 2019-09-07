@@ -36,7 +36,7 @@ RESULT_OF_PNP estimateMotion( FRAME& frame1,
          if(matches[i].distance < goodmatches_threshold * minDist )
               goodmatches.push_back(matches[i]);
     
-     cout<< "优质匹配点数为： "<< goodmatches.size()<<endl;
+    // cout<< "优质匹配点数为： "<< goodmatches.size()<<endl;
 
     //  cv::Mat imgMatches;
     //  cv::drawMatches( frame1.rgb, frame1.kp, frame2.rgb, frame2.kp, goodmatches, imgMatches );
@@ -200,9 +200,14 @@ PointCloud::Ptr joinPointCloud( PointCloud::Ptr original,
     PointCloud::Ptr output (new PointCloud());
     pcl::transformPointCloud( *original, *output, T.matrix() );
     *newCloud += *output;
-
     
-    return newCloud;
+    static pcl::VoxelGrid<PointT> voxel;
+    voxel.setLeafSize( 0.01, 0.01, 0.01 );
+    voxel.setInputCloud( newCloud );
+    PointCloud::Ptr tmp( new PointCloud() );
+    voxel.filter( *tmp );
+    
+    return tmp;
 }
 
 // cvMat2Eigen
@@ -225,4 +230,9 @@ Eigen::Isometry3d cvMat2Eigen( cv::Mat& rvec,
     T(1,3) = tvec.at<double>(1,0); 
     T(2,3) = tvec.at<double>(2,0);
     return T;
+}
+double normofTransform( cv::Mat rvec, 
+                        cv::Mat tvec )
+{
+    return fabs(min(cv::norm(rvec), 2*M_PI-cv::norm(rvec)))+ fabs(cv::norm(tvec));
 }

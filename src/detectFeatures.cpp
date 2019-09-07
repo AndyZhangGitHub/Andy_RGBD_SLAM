@@ -19,8 +19,8 @@ CAMERA_INTRINSIC_PARAMETERS camera;
 
 int main()
 {
-    cv::Mat rgb,depth;
-   
+    
+   cv::FileStorage fs("param.yaml",0);
     // 相机内参
     camera.scale = 1000;
     camera.cx = 325.5;
@@ -28,38 +28,50 @@ int main()
     camera.fx = 518.0;
     camera.fy = 519.0;
     
-    FRAME frame;
-    frame.rgb = cv::imread("../data/rgb1.png");
-    frame.depth = cv::imread("../data/depth1.png",-1);
+    int startIndex = fs["start_index"];
+    int endIndex   = fs["end_index"];
+
+    int curIndex = startIndex;
+    FRAME lastFrame = LoadImages(curIndex);
+    PointCloud::Ptr cloud = image2PointCloud(lastFrame.rgb,lastFrame.depth,camera);
+
+    pcl::visualization::CloudViewer viewer("viewer");
+    cv::namedWindow("image",cv::WINDOW_AUTOSIZE);
+
+    int min_inliers = fs["min_inliers"];
+    double max_norm = (double)fs["max_norm"];
     
-    FRAME frame2;
-    frame2.rgb = cv::imread("../data/rgb2.png");
-    frame2.depth = cv::imread("../data/depth2.png",-1);
-
-    computeKeyPointsAndDesp(frame);
-    computeKeyPointsAndDesp(frame2);
-
-    RESULT_OF_PNP pnp_result = estimateMotion(frame,frame2,camera);
-
-    cout<<"rvec:"<<pnp_result.rvec<<"  tvec: "<<pnp_result.tvec<<endl;
-
-    
-    // 将平移向量和旋转矩阵转换成变换矩阵
-    Eigen::Isometry3d T = cvMat2Eigen(pnp_result.rvec,pnp_result.tvec);
-
-   
-
-    PointCloud::Ptr cloud1 = image2PointCloud( frame.rgb, frame.depth, camera );
-    PointCloud::Ptr cloud2 = image2PointCloud( frame2.rgb, frame2.depth, camera );
-
-    cloud1 = joinPointCloud(cloud1,frame2,T,camera);
-    
-    pcl::visualization::CloudViewer viewer( "viewer" );
-    viewer.showCloud( cloud1 );
-    while( !viewer.wasStopped() )
+    for ( curIndex=startIndex+1; curIndex<endIndex; curIndex++ )
     {
         
+          FRAME curFrame = LoadImages(curIndex);
+          cout<<"curIndex: "<<curIndex<<endl;
+          
+          cv::imshow("image",curFrame.rgb);
+          cv::waitKey(30);
+          RESULT_OF_PNP pnp_result = estimateMotion(lastFrame,curFrame,camera);
+          if ( pnp_result.inliers < min_inliers ) //inliers不够，放弃该帧
+              continue;
+          // 计算运动范围是否太大
+          double norm = normofTransform(pnp_result.rvec, pnp_result.tvec);
+          cout<<"norm = "<<norm<<endl;
+          if ( norm >= max_norm )
+              continue;
+          Eigen::Isometry3d T = cvMat2Eigen( pnp_result.rvec, pnp_result.tvec );
+          cout<<"T="<<T.matrix()<<endl;
+          
+          //cloud = joinPointCloud( cloud, currFrame, T.inverse(), camera );
+          cloud = joinPointCloud( cloud, curFrame, T, camera );
+          
+         
+          viewer.showCloud( cloud );
+  
+          lastFrame = curFrame;
+          cout<<"__________________________________________"<<endl;
     }
+
+    pcl::io::savePCDFile( "../data/result.pcd", *cloud );
+    fs.release();
     return 0;
 
 }

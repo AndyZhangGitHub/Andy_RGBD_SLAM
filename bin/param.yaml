@@ -9,13 +9,14 @@ camera.scale: 1000.0
 
 
 
-rbg_image_path: "/home/Andy/my_workspace/Dataset/TUM/RGBD_dataset/rgb_png/"
-depth_image_path: "/home/Andy/my_workspace/Dataset/TUM/RGBD_dataset/depth_png/"
+rbg_image_path: "/media/Andy/ANDY/rgbd_dataset_freiburg2_large_with_loop/rgb/"
+depth_image_path: "/media/Andy/ANDY/rgbd_dataset_freiburg2_large_with_loop/depth/"
 
 start_index: 1
-end_index: 700
+end_index: 1500
 
-good_match_threshold: 8
+
+good_match_threshold: 4
 
 min_inliers: 5
 
