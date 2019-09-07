@@ -41,6 +41,8 @@ int main()
 
     RESULT_OF_PNP pnp_result = estimateMotion(frame,frame2,camera);
 
+    cout<<"rvec:"<<pnp_result.rvec<<"  tvec: "<<pnp_result.tvec<<endl;
+
     
     // 将平移向量和旋转矩阵转换成变换矩阵
     Eigen::Isometry3d T = cvMat2Eigen(pnp_result.rvec,pnp_result.tvec);

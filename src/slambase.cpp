@@ -16,15 +16,16 @@ RESULT_OF_PNP estimateMotion( FRAME& frame1,
                               FRAME& frame2,
                               CAMERA_INTRINSIC_PARAMETERS& camera )
 {
-      RESULT_OF_PNP result;
+      
       vector<cv::DMatch> matches;
       cv::BFMatcher mathcer;
       mathcer.match(frame1.desp,frame2.desp,matches);
 
+      RESULT_OF_PNP result;
       cv::FileStorage fs("param.yaml",0);
       vector<cv::DMatch> goodmatches;
       double minDist = 9999;
-      double goodmatches_threshold = fs["good_match_threshold"];
+      double goodmatches_threshold = (double)fs["good_match_threshold"];
 
       for(int i = 0;i < matches.size();++i)
          if(matches[i].distance < minDist) 
@@ -35,7 +36,7 @@ RESULT_OF_PNP estimateMotion( FRAME& frame1,
          if(matches[i].distance < goodmatches_threshold * minDist )
               goodmatches.push_back(matches[i]);
     
-     //cout<< "优质匹配点数为： "<< goodmatches.size()<<endl;
+     cout<< "优质匹配点数为： "<< goodmatches.size()<<endl;
 
     //  cv::Mat imgMatches;
     //  cv::drawMatches( frame1.rgb, frame1.kp, frame2.rgb, frame2.kp, goodmatches, imgMatches );
@@ -55,13 +56,16 @@ RESULT_OF_PNP estimateMotion( FRAME& frame1,
      for(int i = 0; i < goodmatches.size();++i)
      {
          cv::Point2f p = frame1.kp[goodmatches[i].queryIdx].pt;//获取第一帧图像中特征点的像素坐标
-         ushort d = frame1.depth.ptr<ushort>((int)p.y)[(int)p.x];
+         ushort d = frame1.depth.ptr<ushort>(int(p.y))[int(p.x)];
+        
 
          if(d == 0) continue;
          else
          {
              cv::Point3f pt(p.x,p.y,d);
              cv::Point3f pd = point2d3d(pt,camera);
+             //cout<<"pt:------"<<pt<<endl;
+             //cout<<"pd:-------------"<<pd<<endl;
              point_camera.push_back(pd);
              point_image.push_back(cv::Point2f(frame2.kp[goodmatches[i].trainIdx].pt));
          }
@@ -141,9 +145,9 @@ cv::Point3f point2d3d( cv::Point3f& point,
                          CAMERA_INTRINSIC_PARAMETERS& camera )
 {
      cv::Point3f result;
-     result.z = (double)(point.z/camera.scale);
-     result.x = (point.x - camera.cx)*point.z /camera.fx;
-     result.y = (point.y - camera.cy)*point.z /camera.fy;
+     result.z =  point.z/camera.scale;
+     result.x = (point.x - camera.cx)*result.z /camera.fx; //注意
+     result.y = (point.y - camera.cy)*result.z /camera.fy;
 
      return result;
 
