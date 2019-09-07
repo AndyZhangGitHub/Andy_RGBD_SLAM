@@ -14,13 +14,17 @@ link_libraries(${PCL_LIBRARY_DIRS})
 
 
 
-
+ADD_LIBRARY( slambase slambase.cpp )
+TARGET_LINK_LIBRARIES( slambase
+    ${OpenCV_LIBS} 
+    ${PCL_LIBRARIES} )
 
 
 
 # 增加一个可执行的二进制
 ADD_EXECUTABLE( generatePointCloud generatePointCloud.cpp )
 target_link_libraries(generatePointCloud 
+                      slambase
                       ${OpenCV_LIBS} 
                       ${PCL_LIBRARIES}
                       )

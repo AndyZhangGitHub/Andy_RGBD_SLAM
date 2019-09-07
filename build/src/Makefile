@@ -125,6 +125,21 @@ generatePointCloud/fast:
 	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/build
 .PHONY : generatePointCloud/fast
 
+# Convenience name for target.
+src/CMakeFiles/slambase.dir/rule:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/slambase.dir/rule
+.PHONY : src/CMakeFiles/slambase.dir/rule
+
+# Convenience name for target.
+slambase: src/CMakeFiles/slambase.dir/rule
+
+.PHONY : slambase
+
+# fast build rule for target.
+slambase/fast:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/slambase.dir/build.make src/CMakeFiles/slambase.dir/build
+.PHONY : slambase/fast
+
 generatePointCloud.o: generatePointCloud.cpp.o
 
 .PHONY : generatePointCloud.o
@@ -152,6 +167,33 @@ generatePointCloud.cpp.s:
 	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.s
 .PHONY : generatePointCloud.cpp.s
 
+slambase.o: slambase.cpp.o
+
+.PHONY : slambase.o
+
+# target to build an object file
+slambase.cpp.o:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/slambase.dir/build.make src/CMakeFiles/slambase.dir/slambase.cpp.o
+.PHONY : slambase.cpp.o
+
+slambase.i: slambase.cpp.i
+
+.PHONY : slambase.i
+
+# target to preprocess a source file
+slambase.cpp.i:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/slambase.dir/build.make src/CMakeFiles/slambase.dir/slambase.cpp.i
+.PHONY : slambase.cpp.i
+
+slambase.s: slambase.cpp.s
+
+.PHONY : slambase.s
+
+# target to generate assembly for a file
+slambase.cpp.s:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/slambase.dir/build.make src/CMakeFiles/slambase.dir/slambase.cpp.s
+.PHONY : slambase.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -161,9 +203,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... generatePointCloud"
+	@echo "... slambase"
 	@echo "... generatePointCloud.o"
 	@echo "... generatePointCloud.i"
 	@echo "... generatePointCloud.s"
+	@echo "... slambase.o"
+	@echo "... slambase.i"
+	@echo "... slambase.s"
 .PHONY : help
 
 
