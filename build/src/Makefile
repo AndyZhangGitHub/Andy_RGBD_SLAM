@@ -111,46 +111,46 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/main.dir/rule:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/main.dir/rule
-.PHONY : src/CMakeFiles/main.dir/rule
+src/CMakeFiles/generatePointCloud.dir/rule:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/generatePointCloud.dir/rule
+.PHONY : src/CMakeFiles/generatePointCloud.dir/rule
 
 # Convenience name for target.
-main: src/CMakeFiles/main.dir/rule
+generatePointCloud: src/CMakeFiles/generatePointCloud.dir/rule
 
-.PHONY : main
+.PHONY : generatePointCloud
 
 # fast build rule for target.
-main/fast:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/build
-.PHONY : main/fast
+generatePointCloud/fast:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/build
+.PHONY : generatePointCloud/fast
 
-main.o: main.cpp.o
+generatePointCloud.o: generatePointCloud.cpp.o
 
-.PHONY : main.o
+.PHONY : generatePointCloud.o
 
 # target to build an object file
-main.cpp.o:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/main.cpp.o
-.PHONY : main.cpp.o
+generatePointCloud.cpp.o:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.o
+.PHONY : generatePointCloud.cpp.o
 
-main.i: main.cpp.i
+generatePointCloud.i: generatePointCloud.cpp.i
 
-.PHONY : main.i
+.PHONY : generatePointCloud.i
 
 # target to preprocess a source file
-main.cpp.i:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/main.cpp.i
-.PHONY : main.cpp.i
+generatePointCloud.cpp.i:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.i
+.PHONY : generatePointCloud.cpp.i
 
-main.s: main.cpp.s
+generatePointCloud.s: generatePointCloud.cpp.s
 
-.PHONY : main.s
+.PHONY : generatePointCloud.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/main.dir/build.make src/CMakeFiles/main.dir/main.cpp.s
-.PHONY : main.cpp.s
+generatePointCloud.cpp.s:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.s
+.PHONY : generatePointCloud.cpp.s
 
 # Help Target
 help:
@@ -160,10 +160,10 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... main"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... generatePointCloud"
+	@echo "... generatePointCloud.o"
+	@echo "... generatePointCloud.i"
+	@echo "... generatePointCloud.s"
 .PHONY : help
 
 
