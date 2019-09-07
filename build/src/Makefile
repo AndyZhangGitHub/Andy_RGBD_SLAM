@@ -111,19 +111,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/generatePointCloud.dir/rule:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/generatePointCloud.dir/rule
-.PHONY : src/CMakeFiles/generatePointCloud.dir/rule
+src/CMakeFiles/detectFeatures.dir/rule:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/detectFeatures.dir/rule
+.PHONY : src/CMakeFiles/detectFeatures.dir/rule
 
 # Convenience name for target.
-generatePointCloud: src/CMakeFiles/generatePointCloud.dir/rule
+detectFeatures: src/CMakeFiles/detectFeatures.dir/rule
 
-.PHONY : generatePointCloud
+.PHONY : detectFeatures
 
 # fast build rule for target.
-generatePointCloud/fast:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/build
-.PHONY : generatePointCloud/fast
+detectFeatures/fast:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/build
+.PHONY : detectFeatures/fast
 
 # Convenience name for target.
 src/CMakeFiles/slambase.dir/rule:
@@ -140,32 +140,32 @@ slambase/fast:
 	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/slambase.dir/build.make src/CMakeFiles/slambase.dir/build
 .PHONY : slambase/fast
 
-generatePointCloud.o: generatePointCloud.cpp.o
+detectFeatures.o: detectFeatures.cpp.o
 
-.PHONY : generatePointCloud.o
+.PHONY : detectFeatures.o
 
 # target to build an object file
-generatePointCloud.cpp.o:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.o
-.PHONY : generatePointCloud.cpp.o
+detectFeatures.cpp.o:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/detectFeatures.cpp.o
+.PHONY : detectFeatures.cpp.o
 
-generatePointCloud.i: generatePointCloud.cpp.i
+detectFeatures.i: detectFeatures.cpp.i
 
-.PHONY : generatePointCloud.i
+.PHONY : detectFeatures.i
 
 # target to preprocess a source file
-generatePointCloud.cpp.i:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.i
-.PHONY : generatePointCloud.cpp.i
+detectFeatures.cpp.i:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/detectFeatures.cpp.i
+.PHONY : detectFeatures.cpp.i
 
-generatePointCloud.s: generatePointCloud.cpp.s
+detectFeatures.s: detectFeatures.cpp.s
 
-.PHONY : generatePointCloud.s
+.PHONY : detectFeatures.s
 
 # target to generate assembly for a file
-generatePointCloud.cpp.s:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/generatePointCloud.cpp.s
-.PHONY : generatePointCloud.cpp.s
+detectFeatures.cpp.s:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/detectFeatures.cpp.s
+.PHONY : detectFeatures.cpp.s
 
 slambase.o: slambase.cpp.o
 
@@ -202,11 +202,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... generatePointCloud"
+	@echo "... detectFeatures"
 	@echo "... slambase"
-	@echo "... generatePointCloud.o"
-	@echo "... generatePointCloud.i"
-	@echo "... generatePointCloud.s"
+	@echo "... detectFeatures.o"
+	@echo "... detectFeatures.i"
+	@echo "... detectFeatures.s"
 	@echo "... slambase.o"
 	@echo "... slambase.i"
 	@echo "... slambase.s"

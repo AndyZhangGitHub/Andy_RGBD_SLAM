@@ -22,8 +22,8 @@ TARGET_LINK_LIBRARIES( slambase
 
 
 # 增加一个可执行的二进制
-ADD_EXECUTABLE( generatePointCloud generatePointCloud.cpp )
-target_link_libraries(generatePointCloud 
+ADD_EXECUTABLE( detectFeatures detectFeatures.cpp )
+target_link_libraries(detectFeatures 
                       slambase
                       ${OpenCV_LIBS} 
                       ${PCL_LIBRARIES}

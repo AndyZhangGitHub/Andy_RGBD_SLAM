@@ -63,13 +63,13 @@ CMAKE_BINARY_DIR = /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build
 # Directory level rules for directory src
 
 # Convenience name for "all" pass in the directory.
-src/all: src/CMakeFiles/generatePointCloud.dir/all
+src/all: src/CMakeFiles/detectFeatures.dir/all
 src/all: src/CMakeFiles/slambase.dir/all
 
 .PHONY : src/all
 
 # Convenience name for "clean" pass in the directory.
-src/clean: src/CMakeFiles/generatePointCloud.dir/clean
+src/clean: src/CMakeFiles/detectFeatures.dir/clean
 src/clean: src/CMakeFiles/slambase.dir/clean
 
 .PHONY : src/clean
@@ -80,39 +80,39 @@ src/preinstall:
 .PHONY : src/preinstall
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/generatePointCloud.dir
+# Target rules for target src/CMakeFiles/detectFeatures.dir
 
 # All Build rule for target.
-src/CMakeFiles/generatePointCloud.dir/all: src/CMakeFiles/slambase.dir/all
-	$(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/depend
-	$(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles --progress-num=1,2 "Built target generatePointCloud"
-.PHONY : src/CMakeFiles/generatePointCloud.dir/all
+src/CMakeFiles/detectFeatures.dir/all: src/CMakeFiles/slambase.dir/all
+	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/depend
+	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles --progress-num=1,2 "Built target detectFeatures"
+.PHONY : src/CMakeFiles/detectFeatures.dir/all
 
 # Include target in all.
-all: src/CMakeFiles/generatePointCloud.dir/all
+all: src/CMakeFiles/detectFeatures.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/generatePointCloud.dir/rule: cmake_check_build_system
+src/CMakeFiles/detectFeatures.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/generatePointCloud.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/detectFeatures.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles 0
-.PHONY : src/CMakeFiles/generatePointCloud.dir/rule
+.PHONY : src/CMakeFiles/detectFeatures.dir/rule
 
 # Convenience name for target.
-generatePointCloud: src/CMakeFiles/generatePointCloud.dir/rule
+detectFeatures: src/CMakeFiles/detectFeatures.dir/rule
 
-.PHONY : generatePointCloud
-
-# clean rule for target.
-src/CMakeFiles/generatePointCloud.dir/clean:
-	$(MAKE) -f src/CMakeFiles/generatePointCloud.dir/build.make src/CMakeFiles/generatePointCloud.dir/clean
-.PHONY : src/CMakeFiles/generatePointCloud.dir/clean
+.PHONY : detectFeatures
 
 # clean rule for target.
-clean: src/CMakeFiles/generatePointCloud.dir/clean
+src/CMakeFiles/detectFeatures.dir/clean:
+	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/clean
+.PHONY : src/CMakeFiles/detectFeatures.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/detectFeatures.dir/clean
 
 .PHONY : clean
 

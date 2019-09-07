@@ -9,6 +9,7 @@ using namespace std;
 // OpenCV
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include<opencv2/opencv.hpp>
 
 //PCL
 #include <pcl/io/pcd_io.h>
@@ -24,10 +25,32 @@ struct CAMERA_INTRINSIC_PARAMETERS
     double cx, cy, fx, fy, scale;
 };
 
+// 帧结构
+struct FRAME
+{
+    cv::Mat rgb, depth; //该帧对应的彩色图与深度图
+    cv::Mat desp;       //特征描述子
+    vector<cv::KeyPoint> kp; //关键点
+};
+
+// PnP 结果
+struct RESULT_OF_PNP
+{
+    cv::Mat rvec, tvec;
+    int inliers;
+};
+
+// computeKeyPointsAndDesp 同时提取关键点与特征描述子
+void computeKeyPointsAndDesp( FRAME& frame);
+
+// estimateMotion 计算两个帧之间的运动
+// 输入：帧1和帧2, 相机内参
+RESULT_OF_PNP estimateMotion( FRAME& frame1, FRAME& frame2, CAMERA_INTRINSIC_PARAMETERS& camera );
+
 // 函数接口
 // image2PonitCloud 将rgb图转换为点云
 PointCloud::Ptr image2PointCloud( cv::Mat& rgb, cv::Mat& depth, CAMERA_INTRINSIC_PARAMETERS& camera );
 
 // point2dTo3d 将单个点从图像坐标转换为空间坐标
 // input: 3维点Point3f (u,v,d)
-cv::Point3f point2dTo3d( cv::Point3f& point, CAMERA_INTRINSIC_PARAMETERS& camera );
+cv::Point3f point2d3d( cv::Point3f& point, CAMERA_INTRINSIC_PARAMETERS& camera );
