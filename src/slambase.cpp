@@ -37,10 +37,10 @@ RESULT_OF_PNP estimateMotion( FRAME& frame1,
     
      //cout<< "优质匹配点数为： "<< goodmatches.size()<<endl;
 
-     cv::Mat imgMatches;
-     cv::drawMatches( frame1.rgb, frame1.kp, frame2.rgb, frame2.kp, goodmatches, imgMatches );
-     cv::imshow( "matches", imgMatches );
-     cv::waitKey( 0 );
+    //  cv::Mat imgMatches;
+    //  cv::drawMatches( frame1.rgb, frame1.kp, frame2.rgb, frame2.kp, goodmatches, imgMatches );
+    //  cv::imshow( "matches", imgMatches );
+    //  cv::waitKey( 20 );
 
      if (goodmatches.size() <= 5) 
      {
@@ -147,4 +147,78 @@ cv::Point3f point2d3d( cv::Point3f& point,
 
      return result;
 
+}
+
+
+FRAME LoadImages(int index)
+{
+
+    cv::FileStorage fs("param.yaml",0);
+    string rgb_path ;
+    string depth_path ;
+    fs["rbg_image_path"] >> rgb_path;
+    fs["depth_image_path"] >> depth_path;
+    
+
+    stringstream ss;
+    ss<< rgb_path<<index<<".png";
+    string rgb_filename;
+    ss>> rgb_filename;
+    
+     
+    ss.clear();
+    ss<<depth_path<<index<<".png";
+    string depth_filename;
+    ss>>depth_filename;
+   
+    FRAME frame;
+    frame.rgb   = cv::imread( rgb_filename);
+    frame.depth = cv::imread( depth_filename,-1);
+    //frame.frameID = index;
+
+    
+    computeKeyPointsAndDesp(frame);
+    fs.release();
+    
+    return frame;
+   
+}
+
+PointCloud::Ptr joinPointCloud( PointCloud::Ptr original,
+                                FRAME& newFrame, 
+                                Eigen::Isometry3d T, 
+                                CAMERA_INTRINSIC_PARAMETERS& camera ) 
+{
+
+    PointCloud::Ptr newCloud = image2PointCloud( newFrame.rgb, newFrame.depth, camera );
+
+    // 合并点云
+    PointCloud::Ptr output (new PointCloud());
+    pcl::transformPointCloud( *original, *output, T.matrix() );
+    *newCloud += *output;
+
+    
+    return newCloud;
+}
+
+// cvMat2Eigen
+Eigen::Isometry3d cvMat2Eigen( cv::Mat& rvec, 
+                               cv::Mat& tvec )
+{
+    cv::Mat R;
+    cv::Rodrigues( rvec, R );
+    Eigen::Matrix3d r;
+    for ( int i=0; i<3; i++ )
+        for ( int j=0; j<3; j++ ) 
+            r(i,j) = R.at<double>(i,j);
+  
+    // 将平移向量和旋转矩阵转换成变换矩阵
+    Eigen::Isometry3d T = Eigen::Isometry3d::Identity();
+
+    Eigen::AngleAxisd angle(r);
+    T = angle;
+    T(0,3) = tvec.at<double>(0,0); 
+    T(1,3) = tvec.at<double>(1,0); 
+    T(2,3) = tvec.at<double>(2,0);
+    return T;
 }
