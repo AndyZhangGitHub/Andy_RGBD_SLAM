@@ -21,6 +21,8 @@ int main()
 {
     
    cv::FileStorage fs("param.yaml",0);
+
+   vector<PointCloud> PointCloudDB;
     // 相机内参
     camera.scale = 1000;
     camera.cx = 325.5;
@@ -34,6 +36,7 @@ int main()
     int curIndex = startIndex;
     FRAME lastFrame = LoadImages(curIndex);
     PointCloud::Ptr cloud = image2PointCloud(lastFrame.rgb,lastFrame.depth,camera);
+    PointCloudDB.push_back(*cloud);
 
     pcl::visualization::CloudViewer viewer("viewer");
     cv::namedWindow("image",cv::WINDOW_AUTOSIZE);
@@ -72,8 +75,8 @@ int main()
           FRAME curFrame = LoadImages(curIndex);
           cout<<"curIndex: "<<curIndex<<endl;
           
-          cv::imshow("image",curFrame.rgb);
-          cv::waitKey(30);
+        //   cv::imshow("image",curFrame.rgb);
+        //   cv::waitKey(30);
           RESULT_OF_PNP pnp_result = estimateMotion(lastFrame,curFrame,camera);
           if ( pnp_result.inliers < min_inliers ) //inliers不够，放弃该帧
               continue;
@@ -86,6 +89,7 @@ int main()
           cout<<"T="<<T.matrix()<<endl;
           
           //cloud = joinPointCloud( cloud, currFrame, T.inverse(), camera );
+          PointCloudDB.push_back(*cloud);
           cloud = joinPointCloud( cloud, curFrame, T, camera );
           
           //构建定点并添加到图中
@@ -114,18 +118,46 @@ int main()
           cout<<"__________________________________________"<<endl;
     }
 
-    cout<<"图中的定点数：" <<globalOptimizer.vertices().size()<<endl;
+    cout<<"图中的顶点数：" <<globalOptimizer.vertices().size()<<endl;
     globalOptimizer.initializeOptimization();
     globalOptimizer.optimize( 100 ); //可以指定优化步数
     cout<<"Optimization done."<<endl;
+
+    
+    FRAME first_frame = LoadImages(1);
+    PointCloud::Ptr global_map_temp = image2PointCloud(first_frame.rgb,first_frame.depth,camera);
+    PointCloud::Ptr temp(new PointCloud());
+
+     pcl::VoxelGrid<PointT> voxel; // 网格滤波器，调整地图分辨率
+     voxel.setLeafSize( 0.01, 0.01, 0.01 );
+
+    for(int i = 2; i < PointCloudDB.size();++i)
+    {
+       g2o::VertexSE3* vertex = dynamic_cast<g2o::VertexSE3*>(globalOptimizer.vertex(i));
+       Eigen::Isometry3d pose = vertex->estimate(); 
+
+       PointCloud::Ptr newcloud = PointCloudDB[i].makeShared();
+
+       pcl::transformPointCloud(*newcloud,*temp, pose.matrix());
+       *global_map_temp += *temp; 
+
+       temp->clear();
+       newcloud->clear();
+    
+    }
+
+    PointCloud::Ptr gloabl_map(new PointCloud());
+    voxel.setInputCloud(global_map_temp);
+    voxel.filter(*gloabl_map);
+    
+    cout<<"----------------------优化后的全局地图---------------"<<endl;
+    viewer.showCloud( gloabl_map );
+    while(1)
+    {
+
+    }
+
     globalOptimizer.clear();
-
-     
-
-
-
-
-
     fs.release();
     return 0;
 
