@@ -13,7 +13,7 @@ rbg_image_path: "/home/Andy/my_workspace/Dataset/TUM/RGBD_dataset/rgb_png/"
 depth_image_path: "/home/Andy/my_workspace/Dataset/TUM/RGBD_dataset/depth_png/"
 
 start_index: 1
-end_index: 700
+end_index: 300
 
 
 good_match_threshold: 4

@@ -46,6 +46,7 @@ struct FRAME
     cv::Mat rgb, depth; //该帧对应的彩色图与深度图
     cv::Mat desp;       //特征描述子
     vector<cv::KeyPoint> kp; //关键点
+    int frameId;
 };
 
 // PnP 结果
@@ -87,3 +88,15 @@ PointCloud::Ptr joinPointCloud( PointCloud::Ptr original,
 // cvMat2Eigen
 Eigen::Isometry3d cvMat2Eigen( cv::Mat& rvec, 
                                cv::Mat& tvec );
+
+ int checkKeyframes( FRAME& f1,
+                               FRAME& f2, 
+                               g2o::SparseOptimizer& opti, bool is_loops=false );
+ // 检测近距离的回环
+void checkNearbyLoops( vector<FRAME>& frames, 
+                       FRAME& currFrame, 
+                       g2o::SparseOptimizer& opti );
+ // 随机检测回环
+ void checkRandomLoops( vector<FRAME>& frames, 
+                        FRAME& currFrame,
+                        g2o::SparseOptimizer& opti );

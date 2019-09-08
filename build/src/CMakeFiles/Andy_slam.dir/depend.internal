@@ -364,8 +364,12 @@ src/CMakeFiles/Andy_slam.dir/slam.cpp.o
  /usr/include/pcl-1.7/pcl/exceptions.h
  /usr/include/pcl-1.7/pcl/filters/boost.h
  /usr/include/pcl-1.7/pcl/filters/filter.h
+ /usr/include/pcl-1.7/pcl/filters/filter_indices.h
  /usr/include/pcl-1.7/pcl/filters/impl/filter.hpp
+ /usr/include/pcl-1.7/pcl/filters/impl/filter_indices.hpp
+ /usr/include/pcl-1.7/pcl/filters/impl/passthrough.hpp
  /usr/include/pcl-1.7/pcl/filters/impl/voxel_grid.hpp
+ /usr/include/pcl-1.7/pcl/filters/passthrough.h
  /usr/include/pcl-1.7/pcl/filters/voxel_grid.h
  /usr/include/pcl-1.7/pcl/for_each_type.h
  /usr/include/pcl-1.7/pcl/geometry/planar_polygon.h
