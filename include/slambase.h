@@ -90,13 +90,17 @@ Eigen::Isometry3d cvMat2Eigen( cv::Mat& rvec,
                                cv::Mat& tvec );
 
  int checkKeyframes( FRAME& f1,
-                               FRAME& f2, 
-                               g2o::SparseOptimizer& opti, bool is_loops=false );
+                     FRAME& f2, 
+                     g2o::SparseOptimizer& opti, 
+                     CAMERA_INTRINSIC_PARAMETERS& camera ,
+                     bool is_loops=false );
  // 检测近距离的回环
 void checkNearbyLoops( vector<FRAME>& frames, 
                        FRAME& currFrame, 
-                       g2o::SparseOptimizer& opti );
+                       g2o::SparseOptimizer& opti ,
+                       CAMERA_INTRINSIC_PARAMETERS& camera );
  // 随机检测回环
  void checkRandomLoops( vector<FRAME>& frames, 
                         FRAME& currFrame,
-                        g2o::SparseOptimizer& opti );
+                        g2o::SparseOptimizer& opti ,
+                        CAMERA_INTRINSIC_PARAMETERS& camera );

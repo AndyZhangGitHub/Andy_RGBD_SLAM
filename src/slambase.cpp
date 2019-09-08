@@ -237,49 +237,54 @@ double normofTransform( cv::Mat rvec,
     return fabs(min(cv::norm(rvec), 2*M_PI-cv::norm(rvec)))+ fabs(cv::norm(tvec));
 }
 
-CHECK_RESULT checkKeyframes( FRAME& f1, FRAME& f2, g2o::SparseOptimizer& opti, bool is_loops)
+// 检测关键帧函数
+int checkKeyframes( FRAME& f1, 
+                    FRAME& f2, 
+                    g2o::SparseOptimizer& opti,
+                    CAMERA_INTRINSIC_PARAMETERS& camera,
+                     bool is_loops)
 {
-    static ParameterReader pd;
-    static int min_inliers = atoi( pd.getData("min_inliers").c_str() );
-    static double max_norm = atof( pd.getData("max_norm").c_str() );
-    static double keyframe_threshold = atof( pd.getData("keyframe_threshold").c_str() );
-    static double max_norm_lp = atof( pd.getData("max_norm_lp").c_str() );
-    static CAMERA_INTRINSIC_PARAMETERS camera = getDefaultCamera();
+    
+    static int min_inliers = 5;
+    static double max_norm = 0.3;
+    static double keyframe_threshold = 0.1;
+    static double max_norm_lp = 2.0;
+   
     static g2o::RobustKernel* robustKernel = g2o::RobustKernelFactory::instance()->construct( "Cauchy" );
     // 比较f1 和 f2
     RESULT_OF_PNP result = estimateMotion( f1, f2, camera );
     if ( result.inliers < min_inliers ) //inliers不够，放弃该帧
-        return NOT_MATCHED;
+        return 0;
     // 计算运动范围是否太大
     double norm = normofTransform(result.rvec, result.tvec);
     if ( is_loops == false )
     {
         if ( norm >= max_norm )
-            return TOO_FAR_AWAY;   // too far away, may be error
+            return 1;   // too far away, may be error
     }
     else
     {
         if ( norm >= max_norm_lp)
-            return TOO_FAR_AWAY;
+            return 2;
     }
 
     if ( norm <= keyframe_threshold )
-        return TOO_CLOSE;   // too adjacent frame
+        return 3;   // too adjacent frame
     // 向g2o中增加这个顶点与上一帧联系的边
     // 顶点部分
     // 顶点只需设定id即可
     if (is_loops == false)
     {
         g2o::VertexSE3 *v = new g2o::VertexSE3();
-        v->setId( f2.frameID );
+        v->setId( f2.frameId );
         v->setEstimate( Eigen::Isometry3d::Identity() );
         opti.addVertex(v);
     }
     // 边部分
     g2o::EdgeSE3* edge = new g2o::EdgeSE3();
     // 连接此边的两个顶点id
-    edge->vertices() [0] = opti.vertex( f1.frameID );
-    edge->vertices() [1] = opti.vertex( f2.frameID );
+    edge->vertices() [0] = opti.vertex( f1.frameId );
+    edge->vertices() [1] = opti.vertex( f2.frameId );
     edge->setRobustKernel( robustKernel );
     // 信息矩阵
     Eigen::Matrix<double, 6, 6> information = Eigen::Matrix< double, 6,6 >::Identity();
@@ -295,12 +300,13 @@ CHECK_RESULT checkKeyframes( FRAME& f1, FRAME& f2, g2o::SparseOptimizer& opti, b
     edge->setMeasurement( T.inverse() );
     // 将此边加入图中
     opti.addEdge(edge);
-    return KEYFRAME;
+    return 4;
 }
 
 void checkNearbyLoops( vector<FRAME>& frames, 
                        FRAME& currFrame, 
-                       g2o::SparseOptimizer& opti )
+                       g2o::SparseOptimizer& opti ,
+                       CAMERA_INTRINSIC_PARAMETERS& camera)
 {
     
     static int nearby_loops = 5;
@@ -311,7 +317,7 @@ void checkNearbyLoops( vector<FRAME>& frames,
         // no enough keyframes, check everyone
         for (size_t i=0; i<frames.size(); i++)
         {
-            checkKeyframes( frames[i], currFrame, opti, true );
+            checkKeyframes( frames[i], currFrame, opti, camera,true );
         }
     }
     else
@@ -319,14 +325,15 @@ void checkNearbyLoops( vector<FRAME>& frames,
         // check the nearest ones
         for (size_t i = frames.size()-nearby_loops; i<frames.size(); i++)
         {
-            checkKeyframes( frames[i], currFrame, opti, true );
+            checkKeyframes( frames[i], currFrame, opti, camera,true );
         }
     }
 }
 
 void checkRandomLoops( vector<FRAME>& frames,
                        FRAME& currFrame, 
-                       g2o::SparseOptimizer& opti )
+                       g2o::SparseOptimizer& opti,
+                       CAMERA_INTRINSIC_PARAMETERS& camera )
 {
     
     static int random_loops = 5;
@@ -338,7 +345,7 @@ void checkRandomLoops( vector<FRAME>& frames,
         // no enough keyframes, check everyone
         for (size_t i=0; i<frames.size(); i++)
         {
-            checkKeyframes( frames[i], currFrame, opti, true );
+            checkKeyframes( frames[i], currFrame, opti, camera,true );
         }
     }
     else
@@ -347,7 +354,7 @@ void checkRandomLoops( vector<FRAME>& frames,
         for (int i=0; i<random_loops; i++)
         {
             int index = rand()%frames.size();
-            checkKeyframes( frames[index], currFrame, opti, true );
+            checkKeyframes( frames[index], currFrame, opti, camera,true );
         }
     }
 }
