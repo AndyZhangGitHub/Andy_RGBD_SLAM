@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named detectFeatures
+# Target rules for targets named Andy_slam
 
 # Build rule for target.
-detectFeatures: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 detectFeatures
-.PHONY : detectFeatures
+Andy_slam: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Andy_slam
+.PHONY : Andy_slam
 
 # fast build rule for target.
-detectFeatures/fast:
-	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/build
-.PHONY : detectFeatures/fast
+Andy_slam/fast:
+	$(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/build
+.PHONY : Andy_slam/fast
 
 #=============================================================================
 # Target rules for targets named slambase
@@ -144,7 +144,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... detectFeatures"
+	@echo "... Andy_slam"
 	@echo "... slambase"
 .PHONY : help
 

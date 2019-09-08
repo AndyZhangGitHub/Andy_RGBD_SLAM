@@ -111,19 +111,19 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-src/CMakeFiles/detectFeatures.dir/rule:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/detectFeatures.dir/rule
-.PHONY : src/CMakeFiles/detectFeatures.dir/rule
+src/CMakeFiles/Andy_slam.dir/rule:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Andy_slam.dir/rule
+.PHONY : src/CMakeFiles/Andy_slam.dir/rule
 
 # Convenience name for target.
-detectFeatures: src/CMakeFiles/detectFeatures.dir/rule
+Andy_slam: src/CMakeFiles/Andy_slam.dir/rule
 
-.PHONY : detectFeatures
+.PHONY : Andy_slam
 
 # fast build rule for target.
-detectFeatures/fast:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/build
-.PHONY : detectFeatures/fast
+Andy_slam/fast:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/build
+.PHONY : Andy_slam/fast
 
 # Convenience name for target.
 src/CMakeFiles/slambase.dir/rule:
@@ -140,32 +140,32 @@ slambase/fast:
 	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/slambase.dir/build.make src/CMakeFiles/slambase.dir/build
 .PHONY : slambase/fast
 
-detectFeatures.o: detectFeatures.cpp.o
+slam.o: slam.cpp.o
 
-.PHONY : detectFeatures.o
+.PHONY : slam.o
 
 # target to build an object file
-detectFeatures.cpp.o:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/detectFeatures.cpp.o
-.PHONY : detectFeatures.cpp.o
+slam.cpp.o:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/slam.cpp.o
+.PHONY : slam.cpp.o
 
-detectFeatures.i: detectFeatures.cpp.i
+slam.i: slam.cpp.i
 
-.PHONY : detectFeatures.i
+.PHONY : slam.i
 
 # target to preprocess a source file
-detectFeatures.cpp.i:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/detectFeatures.cpp.i
-.PHONY : detectFeatures.cpp.i
+slam.cpp.i:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/slam.cpp.i
+.PHONY : slam.cpp.i
 
-detectFeatures.s: detectFeatures.cpp.s
+slam.s: slam.cpp.s
 
-.PHONY : detectFeatures.s
+.PHONY : slam.s
 
 # target to generate assembly for a file
-detectFeatures.cpp.s:
-	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/detectFeatures.cpp.s
-.PHONY : detectFeatures.cpp.s
+slam.cpp.s:
+	cd /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build && $(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/slam.cpp.s
+.PHONY : slam.cpp.s
 
 slambase.o: slambase.cpp.o
 
@@ -202,11 +202,11 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... detectFeatures"
+	@echo "... Andy_slam"
 	@echo "... slambase"
-	@echo "... detectFeatures.o"
-	@echo "... detectFeatures.i"
-	@echo "... detectFeatures.s"
+	@echo "... slam.o"
+	@echo "... slam.i"
+	@echo "... slam.s"
 	@echo "... slambase.o"
 	@echo "... slambase.i"
 	@echo "... slambase.s"

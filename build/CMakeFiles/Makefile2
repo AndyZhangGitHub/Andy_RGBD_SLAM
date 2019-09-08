@@ -63,13 +63,13 @@ CMAKE_BINARY_DIR = /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build
 # Directory level rules for directory src
 
 # Convenience name for "all" pass in the directory.
-src/all: src/CMakeFiles/detectFeatures.dir/all
+src/all: src/CMakeFiles/Andy_slam.dir/all
 src/all: src/CMakeFiles/slambase.dir/all
 
 .PHONY : src/all
 
 # Convenience name for "clean" pass in the directory.
-src/clean: src/CMakeFiles/detectFeatures.dir/clean
+src/clean: src/CMakeFiles/Andy_slam.dir/clean
 src/clean: src/CMakeFiles/slambase.dir/clean
 
 .PHONY : src/clean
@@ -80,39 +80,39 @@ src/preinstall:
 .PHONY : src/preinstall
 
 #=============================================================================
-# Target rules for target src/CMakeFiles/detectFeatures.dir
+# Target rules for target src/CMakeFiles/Andy_slam.dir
 
 # All Build rule for target.
-src/CMakeFiles/detectFeatures.dir/all: src/CMakeFiles/slambase.dir/all
-	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/depend
-	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles --progress-num=1,2 "Built target detectFeatures"
-.PHONY : src/CMakeFiles/detectFeatures.dir/all
+src/CMakeFiles/Andy_slam.dir/all: src/CMakeFiles/slambase.dir/all
+	$(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/depend
+	$(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles --progress-num=1,2 "Built target Andy_slam"
+.PHONY : src/CMakeFiles/Andy_slam.dir/all
 
 # Include target in all.
-all: src/CMakeFiles/detectFeatures.dir/all
+all: src/CMakeFiles/Andy_slam.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-src/CMakeFiles/detectFeatures.dir/rule: cmake_check_build_system
+src/CMakeFiles/Andy_slam.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles 4
-	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/detectFeatures.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/Andy_slam.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/build/CMakeFiles 0
-.PHONY : src/CMakeFiles/detectFeatures.dir/rule
+.PHONY : src/CMakeFiles/Andy_slam.dir/rule
 
 # Convenience name for target.
-detectFeatures: src/CMakeFiles/detectFeatures.dir/rule
+Andy_slam: src/CMakeFiles/Andy_slam.dir/rule
 
-.PHONY : detectFeatures
-
-# clean rule for target.
-src/CMakeFiles/detectFeatures.dir/clean:
-	$(MAKE) -f src/CMakeFiles/detectFeatures.dir/build.make src/CMakeFiles/detectFeatures.dir/clean
-.PHONY : src/CMakeFiles/detectFeatures.dir/clean
+.PHONY : Andy_slam
 
 # clean rule for target.
-clean: src/CMakeFiles/detectFeatures.dir/clean
+src/CMakeFiles/Andy_slam.dir/clean:
+	$(MAKE) -f src/CMakeFiles/Andy_slam.dir/build.make src/CMakeFiles/Andy_slam.dir/clean
+.PHONY : src/CMakeFiles/Andy_slam.dir/clean
+
+# clean rule for target.
+clean: src/CMakeFiles/Andy_slam.dir/clean
 
 .PHONY : clean
 

@@ -48,7 +48,17 @@ g2o/core/robust_kernel_factory.h
 g2o/core/optimization_algorithm_levenberg.h
 -
 
-/home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/src/slambase.cpp
+/home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/src/slam.cpp
+iostream
+-
+string
+-
+opencv2/opencv.hpp
+-
+pcl/io/pcd_io.h
+-
+pcl/point_types.h
+-
 slambase.h
 /home/Andy/my_workspace/Code/slam_exercise/Andy_SLAM_v1/src/slambase.h
 
